@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%- include header %>
+	<style type="text/css">
+		section{
+			position: relative;
+		}
+		section>*{
+			padding-left: 10px;
+			    color: black;
+		}
+		#pageNav{
+		    width: 96%;
+	        display: flex;
+    		justify-content: space-between;
+		}
+	</style>
+</head>
+<body>
+	<div id="main_content">
+		<%- include nav %>	
+		<div id="content_outer">
+			<article style="margin: 2%;"><%- articleDetail.content%></article>
+			<div id="pageNav">
+				<% if (articleDetail.prevKeyID) {%>
+				<a href="/articleDetail/<%= articleDetail.prevKeyID%>">上一篇：<%= articleDetail.prevTitle %></a>
+				<% } %>		
+				<% if (articleDetail.nextKeyID) {%>
+				<a href="/articleDetail/<%= articleDetail.nextKeyID%>">下一篇：<%= articleDetail.nextTitle%></a>
+				<% } %>	
+			</div>
+			<hr>
+			<div id="commont" class="bg-white commont" style=" margin: 0 auto;">
+				<h3>我想说</h3>
+				<textarea name="comment" placeholder="来说两句吧..."></textarea>
+				<div>
+					<label>您的大名：</label><br>
+					<input type="text" name="author" class="ws nm_sub" style="margin: 0;"> <-必填
+				</div>
+				<div>
+					<label>您的个人地址：</label><br>
+					<input type="url" name="authorLink" class="wm nm_sub" style="margin: 0;"> <-NO AD
+				</div>
+				<a class="btn btn-primary" href="javascript:void(0);" onclick="makeComment('<%= articleDetail._id%>');" style=" margin-left: 3%;">发表意见</a>
+				<hr class="color-gray">
+				<h3 style="position: relative;" id="msgNum">
+					<span class="border-no-bottom">留言(<%= articleDetail.commentList.length %> 条)</span>
+					<hr class="after-border-no-bottom">
+				</h3>
+				<div class="comments">
+				<% articleDetail.commentList.forEach(function (comment) { %>
+					<div class="comment">
+						<h4><% if (comment.authorLink !== "") {%>
+							<a href="<%= comment.authorLink%>" target="_blank"><%= comment.author%></a>
+							<%} else {%><%= comment.author%><%}%> 说：
+						</h4>
+						<div class="comment-content-<%- comment._id%>"><%- comment.comment%></div>
+						<div class="comment-footer"><%= comment.commentTime%> | <a href="#commont" onclick="quoteReply('comment-content-<%- comment._id%>', '<%= comment.author%>');">引用回复</a>| <a  onclick="deleteComment('<%- comment._id%>')" href="javascript:void(0);">删除</a></div>
+					</div>
+				<% }) %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 隐藏区域 -->
+	<%- include footer %>	
+	<script type="text/javascript">
+		seajs.use(["articleDetail.js"]);
+	</script>
+</body>
+</html>

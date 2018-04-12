@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%- include header %>
+	<link rel='stylesheet' href='/stylesheets/publish.css' />
+</head>
+<body>
+	<div id="main_content">
+		<%- include nav %>	
+		<div id="content_outer">
+			<section>
+				<p>标题</p>
+				<input type="text" name="articleTitle" class='nm_sub' value="<%= curArticle.articleTitle%>">
+				<p>内容</p>
+				<div id="editor"><%-curArticle.content%></div>
+				<p>标签</p>
+				<input type="text" name="articleTag" class='nm_sub wm' value="<%= curArticle.articleTag%>">
+				<em>多个关键字之间用“，”分隔</em>
+				<p>密码保护</p>
+				<input type="text" name="protected" class='nm_sub wm'>
+				<div style='display: flex; justify-content: center; padding-bottom: 20px;'>
+					<a id="btn-publish" class='btn btn-primary' href="javascript:void(0);">发布</a>
+					<a id="btn-save" class='btn btn-primary' href="javascript:void(0);">存为草稿</a>
+					<a class='btn btn-cancel' href="javascript:void(0);" onclick="history.back(); return false;">取消</a>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<!-- 隐藏区域 -->
+	<input type="hidden" id="hid_id" value="<%= curArticle._id%>">
+	<%- include footer %>	
+	<script type="text/javascript" src="/javascripts/common/wangEditor.min.js"></script>
+	<script type="text/javascript">
+		seajs.use(["publish.js"]);
+	</script>
+</body>
+</html>

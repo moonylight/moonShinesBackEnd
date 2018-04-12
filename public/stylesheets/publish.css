@@ -1,0 +1,23 @@
+section{
+	color: black;
+}
+section>*{
+	
+    width: 90%;
+    margin: auto;	
+}
+#content_outer>section>em{
+	font-size: 0.8em;
+}
+#content_outer>section>p{
+	padding: 2% 0 0 0;
+}
+#editor{
+	margin-top: 20px;
+}
+#content_outer>section>input{
+	margin-right: 0;
+}
+.w-e-text-container{
+	min-height: 500px;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%- include header %>
+	<style type="text/css">
+		section{
+			position: relative;
+		}
+		section>*{
+			padding-left: 10px;
+			    color: black;
+		}
+		#pageNav{
+		    width: 96%;
+	        display: flex;
+    		justify-content: space-between;
+		}
+	</style>
+</head>
+<body>
+	<div id="main_content">
+		<%- include nav %>	
+		<div id="content_outer">
+			<div id="commont" class="bg-white commont" style=" margin: 0 auto;">
+				<div class="comments">
+				<% messageList.forEach(function (comment) { %>
+					<div class="comment">
+						<h4><% if (comment.authorLink !== "") {%>
+							<a href="<%= comment.authorLink%>" target="_blank"><%= comment.author%></a>
+							<%} else {%><%= comment.author%><%}%> 说：
+						</h4>
+						<div class="comment-content-<%- comment._id%>"><%- comment.message%></div>
+						<div class="comment-footer"><%= comment.commentTime%> | <% if (comment.isDelete ==1) {%>已删除<%} else {%><a onclick="deleteMessage('<%- comment._id%>')" href="javascript:void(0);">删除</a><%}%></div>
+					</div>
+				<% }) %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 隐藏区域 -->
+	<%- include footer %>	
+	<script type="text/javascript">
+		seajs.use(["message.js"]);
+	</script>
+</body>
+</html>

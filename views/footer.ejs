@@ -1,0 +1,14 @@
+<!-- <script type="text/javascript" src="/javascripts/common/jquery-3.2.1.js"></script> -->
+<script type="text/javascript" src="/javascripts/common/sea.js"></script>
+<script type="text/javascript" src="/javascripts/common/seajs-preload.js"></script>
+<script type="text/javascript">
+	seajs.config({
+		base: "/javascripts/",
+		alias: {
+			"util": "common/util.js",
+			"jquery": "common/jquery-3.2.1.js",
+			"moment": "common/moment.min.js"
+		},
+		preload: ["moment"]
+	});
+</script>

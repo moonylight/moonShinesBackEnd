@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<%- include header %>
+</head>
+<body>
+	<div id="main_content">
+		<%- include nav %>	
+		<div id="content_outer">
+			<article>
+				<section>
+					<% if (sticky.articleTitle) {%>
+					<h3><%= sticky.articleTitle%></h3>
+					<p><%- sticky.firstParagraph%></p>
+					<a href='/articleDetail/<%= sticky._id%>' target="_blank">继续阅读全文 »</a>
+					<footer><%= sticky.modifyTime%> | <a href="//www.ruanyifeng.com/blog/2017/11/technology-training.html#comments" target="_blank">留言(<%= sticky.msgNum%>)</a></footer>
+					<% } %>	
+				</section>
+				<section>	
+					<% if (articleShortList.length) {%>
+					<h4>最新文章</h4>
+					<ul>						
+						<% articleShortList.forEach(function (articleShort) { %>
+						<li><a href="/articleDetail/<%= articleShort._id%>"><%= articleShort.articleTitle%></a> &nbsp;&nbsp;&nbsp;&nbsp;<%= articleShort.modifyTime%></li>
+						<% }) %>
+					</ul>						
+					<% } else {%>	
+					<h4>暂无任何文章</h4>
+					<% } %>	
+				</section>
+			</article>
+		</div>
+	</div>
+</body>
+</html>
